@@ -1,2 +1,2 @@
-# Temporary-files
-temporary file saver pet-project on Python + FastAPI
+# HiddenSharing
+App for safe and anonymouse file sharing
