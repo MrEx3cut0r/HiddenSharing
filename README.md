@@ -1,2 +1,2 @@
 # HiddenSharing
-App for safe and anonymouse file sharing
+App for safe and anonymous file sharing
