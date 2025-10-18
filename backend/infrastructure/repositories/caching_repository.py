@@ -10,12 +10,11 @@ from infrastructure.dependencies.model_filler import fillUploadedModel
 
 class CachingRepository():
 	def __init__(self) -> None:
-		self.r = Redis(host='0.0.0.0', port='6379')
+		self.r = Redis(host='redis-cache', port='6379')
 
 	async def add(self, file_model: FileModel) -> UploadedModel:
 		pickled = pickle.dumps(file_model)
 		uploaded = fillUploadedModel()
-		print(uploaded)
 		await self.r.set(uploaded.token, pickled)
 		await self.r.expire(uploaded.token, 86400)
 		return uploaded
