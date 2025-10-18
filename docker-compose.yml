@@ -10,6 +10,7 @@ services:
             - ./nginx/conf.d:/etc/nginx/conf.d
         depends_on:
             - backend
+            - frontend
         networks:
             - app-network
         restart: unless-stopped
@@ -37,8 +38,22 @@ services:
         command: python3 main.py
         networks:
             - app-network
-
+    frontend:
+        build: ./frontend
+        container_name: frontend
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
+        ports:
+            - "3000:3000"
+        environment:
+            NODE_ENV: development
+        restart: unless-stopped
+        networks:
+            - app-network
+        command: ["npm", "run", "dev"]
 networks:
     app-network:
+        driver: bridge
 volumes:
     redis_data:
